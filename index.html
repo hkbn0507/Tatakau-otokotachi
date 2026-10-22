@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, user-scalable=no"
+  >
+  <title>闘う漢達</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+<div id="game">
+
+  <!-- HOME -->
+  <section id="homeScreen" class="screen active">
+
+    <div class="home-logo">
+      <div class="logo-small">2D FIGHTING GAME</div>
+      <h1>闘う漢達</h1>
+      <div class="logo-line"></div>
+    </div>
+
+    <div class="main-menu">
+
+      <button id="homeFight" class="menu-button main">
+        FIGHT
+        <span>対戦する</span>
+      </button>
+
+      <button id="homeGacha" class="menu-button">
+        GACHA
+        <span>キャラクターを獲得</span>
+      </button>
+
+      <button id="homeFighters" class="menu-button">
+        FIGHTERS
+        <span>所持キャラクター</span>
+      </button>
+
+    </div>
+
+    <div class="version">VER. 0.9</div>
+
+  </section>
+
+
+  <!-- MODE -->
+  <section id="modeScreen" class="screen">
+
+    <button class="back-button" data-screen="homeScreen">
+      ‹ BACK
+    </button>
+
+    <h2 class="screen-title">SELECT MODE</h2>
+    <div class="title-line"></div>
+
+    <div class="mode-container">
+
+      <button id="cpuBattle" class="mode-card">
+
+        <div class="mode-icon">CPU</div>
+
+        <div>
+          <strong>CPU BATTLE</strong>
+          <span>CPUと1対1で対戦</span>
+        </div>
+
+      </button>
+
+
+      <button id="playerBattle" class="mode-card">
+
+        <div class="mode-icon">2P</div>
+
+        <div>
+          <strong>PLAYER BATTLE</strong>
+          <span>2人で対戦</span>
+        </div>
+
+        <div class="soon">COMING SOON</div>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- CHARACTER SELECT -->
+  <section id="selectScreen" class="screen">
+
+    <button class="back-button" data-screen="modeScreen">
+      ‹ BACK
+    </button>
+
+    <h2 class="screen-title">SELECT FIGHTER</h2>
+    <div class="title-line"></div>
+
+    <div id="fighterCards">
+
+      <!-- 川上 -->
+      <div class="fighter-card selected" data-fighter="kawakami">
+
+        <div class="portrait kawakami-portrait">
+          <div class="mini-head"></div>
+          <div class="mini-body"></div>
+        </div>
+
+        <strong class="fighter-card-name">川上</strong>
+
+        <button class="detail-button" data-detail="kawakami">
+          キャラ詳細
+        </button>
+
+      </div>
+
+
+      <!-- 岡崎 -->
+      <div class="fighter-card" data-fighter="okazaki">
+
+        <div class="portrait okazaki-portrait">
+          <div class="mini-head"></div>
+          <div class="mini-body"></div>
+        </div>
+
+        <strong class="fighter-card-name">岡崎</strong>
+
+        <button class="detail-button" data-detail="okazaki">
+          キャラ詳細
+        </button>
+
+      </div>
+
+
+      <!-- 山田 -->
+      <div class="fighter-card" data-fighter="yamada">
+
+        <div class="portrait yamada-portrait">
+          <div class="mini-head"></div>
+          <div class="mini-body"></div>
+        </div>
+
+        <strong class="fighter-card-name">山田</strong>
+
+        <button class="detail-button" data-detail="yamada">
+          キャラ詳細
+        </button>
+
+      </div>
+
+    </div>
+
+    <div id="selectedCharacterText">
+      SELECTED：川上
+    </div>
+
+    <button id="startFight">
+      FIGHT!
+    </button>
+
+  </section>
+
+
+  <!-- BATTLE -->
+  <section id="battleScreen" class="screen">
+
+    <div id="hud">
+
+      <div class="fighter-info">
+
+        <div id="battlePlayerName" class="name">
+          川上
+        </div>
+
+        <div class="hp-frame">
+          <div id="playerHP" class="hp"></div>
+        </div>
+
+        <div class="gauge-frame">
+          <div id="playerGauge" class="gauge"></div>
+        </div>
+
+      </div>
+
+      <div id="timer">99</div>
+
+      <div class="fighter-info enemy-info">
+
+        <div class="name">CPU</div>
+
+        <div class="hp-frame">
+          <div id="enemyHP" class="hp"></div>
+        </div>
+
+        <div class="gauge-frame">
+          <div id="enemyGauge" class="gauge"></div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div id="arena">
+
+      <!-- PLAYER -->
+      <div id="player" class="fighter">
+
+        <div class="destroy-aura">
+          <div class="aura-core"></div>
+          <div class="aura-ring aura-ring-one"></div>
+          <div class="aura-ring aura-ring-two"></div>
+          <div class="aura-flame flame-one"></div>
+          <div class="aura-flame flame-two"></div>
+          <div class="aura-flame flame-three"></div>
+        </div>
+
+        <div class="head"></div>
+        <div class="body"></div>
+
+        <div class="arm arm-left"></div>
+        <div class="arm arm-right"></div>
+
+        <div class="leg leg-left"></div>
+        <div class="leg leg-right"></div>
+
+      </div>
+
+
+      <!-- CPU -->
+      <div id="enemy" class="fighter enemy">
+
+        <div class="head"></div>
+        <div class="body"></div>
+
+        <div class="arm arm-left"></div>
+        <div class="arm arm-right"></div>
+
+        <div class="leg leg-left"></div>
+        <div class="leg leg-right"></div>
+
+      </div>
+
+      <div id="message"></div>
+      <div id="hitText"></div>
+
+    </div>
+
+
+    <!-- CONTROLS -->
+    <div id="controls">
+
+      <div id="movementControls">
+
+        <button id="left" class="move-button">◀</button>
+
+        <button id="jump" class="jump-button">
+          JUMP
+        </button>
+
+        <button id="right" class="move-button">▶</button>
+
+      </div>
+
+
+      <div id="combatControls">
+
+        <div>
+          <button id="guard">GUARD</button>
+          <button id="special">SPECIAL</button>
+        </div>
+
+        <div>
+          <button id="punch">PUNCH</button>
+          <button id="kick">KICK</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- COMING SOON -->
+  <div id="popup" class="popup">
+
+    <div class="popup-box">
+
+      <h2 id="popupTitle">COMING SOON</h2>
+
+      <p id="popupText">
+        もう少し待ってね。
+      </p>
+
+      <button id="closePopup">OK</button>
+
+    </div>
+
+  </div>
+
+
+  <!-- CHARACTER DETAIL -->
+  <div id="characterDetailPopup" class="popup">
+
+    <div class="character-detail-window">
+
+      <!-- × -->
+      <button
+        id="closeCharacterDetail"
+        class="detail-close-x"
+        aria-label="閉じる"
+      >
+        ×
+      </button>
+
+
+      <!-- 固定部分 -->
+      <div class="detail-fixed">
+
+        <div class="detail-small">
+          FIGHTER PROFILE
+        </div>
+
+        <h2 id="detailName">川上</h2>
+
+        <div class="character-stats">
+
+          <div>
+            <span>HP</span>
+            <strong id="detailHP">100</strong>
+          </div>
+
+          <div>
+            <span>ATK</span>
+            <strong id="detailATK">80</strong>
+          </div>
+
+          <div>
+            <span>SPD</span>
+            <strong id="detailSPD">60</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- 説明だけスクロール -->
+      <div class="detail-scroll">
+
+        <div class="skill-box">
+
+          <div class="skill-label">
+            UNIQUE SKILL
+          </div>
+
+          <h3 id="detailSkill">
+            かたいほね
+          </h3>
+
+          <p id="detailSkillDescription"></p>
+
+        </div>
+
+
+        <div class="special-detail-box">
+
+          <div class="special-detail-label">
+            SPECIAL
+          </div>
+
+          <h3 id="detailSpecial">
+            頭突き
+          </h3>
+
+          <p id="detailSpecialDescription"></p>
+
+        </div>
+
+        <div class="scroll-hint">
+          ↑ ↓ SCROLL
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RESULT -->
+  <div id="resultPopup" class="popup">
+
+    <div class="popup-box result-box">
+
+      <div id="resultText">
+        YOU WIN!
+      </div>
+
+      <button id="rematch">
+        REMATCH
+      </button>
+
+      <button id="returnHome">
+        HOME
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="./script.js"></script>
+
+</body>
+</html>
